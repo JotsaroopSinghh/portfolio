@@ -129,7 +129,7 @@
             position: relative;
             z-index: 1;
         }
-    
+
         .section-title {
             font-size: 2.4rem;
             margin-bottom: 4rem;
@@ -155,7 +155,7 @@
             margin-bottom: 10rem;
         }
 
-        /* Techh */
+        /* Tech */
         .tech-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -228,7 +228,7 @@
             transform: translateY(-2px);
         }
 
-        /* Project Grid */
+        /* Projects Grid */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -315,6 +315,154 @@
             font-size: 0.8rem;
             color: var(--text-secondary);
             font-weight: 500;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(24px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.25s ease;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.3rem;
+            right: 1.3rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .modal-tech {
+            margin-bottom: 2rem;
+        }
+
+        .modal-tech-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-3);
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .modal-tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .modal-tech-tag {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 0.85rem 1.4rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.3);
+        }
+
+        .modal-btn-secondary {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .modal-btn-secondary:hover {
+            border-color: var(--accent-1);
+            color: var(--accent-1);
         }
 
         /* Chess Section */
@@ -495,6 +643,15 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+
+            .modal-content {
+                padding: 2rem;
+                width: 95%;
+            }
+
+            .modal-links {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -553,18 +710,34 @@
         <section id="projects">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image"></div>
+                <div class="project-card" onclick="openProjectModal(
+                    'Focus Tab',
+                    'A productivity-focused Chrome extension that transforms your new tab into a dashboard with Pomodoro timer, to-do list, weather, music, and customizable backgrounds.',
+                    ['HTML', 'CSS', 'JavaScript', 'APIs'],
+                    'https://github.com/JotsaroopSinghh/Focus-Tab',
+                    'https://chromewebstore.google.com/detail/focus-tab/leiofepjjglilgnegnnppaglgdnpieen'
+                )">
+                    <div class="project-image" >
+                        <img src="assets/unnamed.jpg" alt="Focus Tab">
+                    </div>
                     <div class="project-content">
-                        <h3>1</h3>
-                        <p>Lorem Ipsum</p>
+                        <h3>Focus Tab</h3>
+                        <p>Productivity Chrome extension new tab dashboard.</p>
                         <div class="project-tech">
-                            <span class="project-tech-tag">1</span>
+                            <span class="project-tech-tag">HTML</span>
+                            <span class="project-tech-tag">CSS</span>
+                            <span class="project-tech-tag">JavaScript</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" onclick="openProjectModal(
+                    'Project 2',
+                    'Coming soon. Placeholder for a future project. Replace this text and links once the project is ready.',
+                    ['-'],
+                    '#',
+                    '#'
+                )">
                     <div class="project-image"></div>
                     <div class="project-content">
                         <h3>Project 2</h3>
@@ -575,7 +748,13 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" onclick="openProjectModal(
+                    'Project 3',
+                    'Coming soon. Placeholder for a future project. Replace this text and links once the project is ready.',
+                    ['-'],
+                    '#',
+                    '#'
+                )">
                     <div class="project-image"></div>
                     <div class="project-content">
                         <h3>Project 3</h3>
@@ -635,8 +814,25 @@
         </div>
     </footer>
 
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProjectModal()">×</button>
+            <h2 class="modal-title" id="modalTitle">Project Title</h2>
+            <p class="modal-description" id="modalDescription">Project description goes here.</p>
+
+            <div class="modal-tech">
+                <div class="modal-tech-title">Technologies</div>
+                <div class="modal-tech-list" id="modalTechList"></div>
+            </div>
+
+            <div class="modal-links">
+                <a id="modalGithubBtn" href="#" class="modal-btn modal-btn-primary" target="_blank">View on GitHub</a>
+                <a id="modalLiveBtn" href="#" class="modal-btn modal-btn-secondary" target="_blank">Link</a>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Connected network particle effect in hero section
         const heroSection = document.querySelector('.hero');
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
@@ -746,12 +942,60 @@
                 }
             }
             
-             particles.forEach(p => p.draw());
+            particles.forEach(p => p.draw());
             
             requestAnimationFrame(animate);
         }
         
         animate();
+
+        function openProjectModal(title, description, technologies, githubLink, liveLink) {
+            const modal = document.getElementById('projectModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalTechList = document.getElementById('modalTechList');
+            const modalGithubBtn = document.getElementById('modalGithubBtn');
+            const modalLiveBtn = document.getElementById('modalLiveBtn');
+
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+
+            modalTechList.innerHTML = technologies
+                .map(tech => `<span class="modal-tech-tag">${tech}</span>`)
+                .join('');
+
+            modalGithubBtn.href = githubLink;
+            modalLiveBtn.href = liveLink;
+
+            modal.classList.add('active');
+
+            function handleBackdropClick(e) {
+                if (e.target === modal) closeProjectModal();
+            }
+            function handleEsc(e) {
+                if (e.key === 'Escape') closeProjectModal();
+            }
+
+            modal._backdropHandler = handleBackdropClick;
+            modal._escHandler = handleEsc;
+
+            modal.addEventListener('click', handleBackdropClick);
+            document.addEventListener('keydown', handleEsc);
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('active');
+
+            if (modal._backdropHandler) {
+                modal.removeEventListener('click', modal._backdropHandler);
+                modal._backdropHandler = null;
+            }
+            if (modal._escHandler) {
+                document.removeEventListener('keydown', modal._escHandler);
+                modal._escHandler = null;
+            }
+        }
     </script>
 </body>
 </html>
