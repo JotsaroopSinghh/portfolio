@@ -3,41 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jotsaroop Singh Portfolio</title>
+    <title>Jotsaroop Singh | Portfolio</title>
     <style>
+        :root {
+            --bg: #0b0f19;
+            --card: rgba(255,255,255,0.03);
+            --text: #e6e6f0;
+            --text-secondary: rgba(230,230,240,0.7);
+            --border: rgba(255,255,255,0.08);
+            --accent: #6366f1;
+            --accent-2: #ec4899;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
         }
-
-        :root {
-            --bg: #0f0f14;
-            --bg-secondary: #16161e;
-            --text: #e8e8f0;
-            --text-secondary: #a8a8b8;
-            --accent-1: #6366f1;
-            --accent-2: #ec4899;
-            --accent-3: #0ea5e9;
-            --border: #1f1f2e;
-        }
-
-        html {
+        html{
             scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.06) 0%, transparent 50%);
-            background-attachment: fixed;
+            overflow-x: hidden;
         }
 
-        /* Header */
+        canvas#bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+        }
+
         header {
             position: sticky;
             top: 0;
@@ -51,73 +54,67 @@
         }
 
         .logo {
-            font-size: 1.5rem;
             font-weight: 800;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            letter-spacing: 0.5px;
+            color: var(--text);
         }
 
-        /* Main */
+        .nav {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+            transform: translateY(-1px);
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.65rem 0.95rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 800;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.6);
+        }
+
         main {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 4rem 2rem;
         }
 
-        /* Hero */
         .hero {
-            padding: 12rem 0 8rem;
             text-align: center;
+            margin: 3rem 0 5rem;
             position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -30%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float 12s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -20%;
-            left: -15%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float 15s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-30px); }
         }
 
         .hero h1 {
-            font-size: 3.8rem;
-            margin-bottom: 1.5rem;
+            font-size: 3.2rem;
             font-weight: 900;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            position: relative;
-            z-index: 1;
-            background: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #0ea5e9 100%);
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 1rem;
         }
 
         .hero p {
@@ -125,494 +122,275 @@
             color: var(--text-secondary);
             max-width: 700px;
             margin: 0 auto;
-            line-height: 1.8;
+        }
+
+        .hero-actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 0.9rem;
+            justify-content: center;
+            flex-wrap: wrap;
             position: relative;
             z-index: 1;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.05rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 800;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.6);
+        }
+
+        .hero-btn-primary {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(236, 72, 153, 0.18) 100%);
         }
 
         .section-title {
-            font-size: 2.4rem;
-            margin-bottom: 4rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            position: relative;
-            display: inline-block;
-            color: var(--text);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: center;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #6366f1 0%, #0ea5e9 100%);
-            border-radius: 2px;
-        }
-
-        section {
-            margin-bottom: 10rem;
-        }
-
-        /* Tech */
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
         }
 
-        .tech-category {
-            background: var(--bg-secondary);
+        .tech-card {
+            background: var(--card);
             border: 1px solid var(--border);
-            padding: 2.2rem;
-            border-radius: 12px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: transform 0.25s ease, border-color 0.25s ease;
         }
 
-        .tech-category::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transition: left 0.6s ease;
+        .tech-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.5);
         }
 
-        .tech-category:hover {
-            border-color: var(--accent-1);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+        .tech-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            font-weight: 800;
         }
 
-        .tech-category:hover::before {
-            left: 100%;
+        .tech-card p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
         }
 
-        .tech-category h3 {
-            font-size: 0.95rem;
-            margin-bottom: 1.4rem;
-            color: #0ea5e9;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 1;
+        .projects {
+            margin-top: 5rem;
         }
 
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem;
-        }
-
-        .tech-tag {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 0.55rem 1rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            color: var(--text);
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .tech-tag:hover {
-            border-color: #ec4899;
-            color: #ec4899;
-            background: var(--bg-secondary);
-            transform: translateY(-2px);
-        }
-
-        /* Projects Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
         }
 
         .project-card {
-            background: var(--bg-secondary);
+            background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 16px;
+            padding: 1.7rem;
+            transition: transform 0.25s ease, border-color 0.25s ease;
             position: relative;
-        }
-
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
+            overflow: hidden;
         }
 
         .project-card:hover {
-            border-color: #6366f1;
-            transform: translateY(-10px);
-            box-shadow: 0 24px 48px rgba(99, 102, 241, 0.2);
+            transform: translateY(-5px);
+            border-color: rgba(236, 72, 153, 0.5);
         }
 
-        .project-card:hover::after {
-            opacity: 1;
-        }
-
-        .project-image {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, #6366f1 0%, #0ea5e9 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-        }
-
-        .project-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-content h3 {
-            font-size: 1.35rem;
-            margin-bottom: 0.7rem;
-            font-weight: 700;
-        }
-
-        .project-content p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1.3rem;
-            line-height: 1.6;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .project-tech-tag {
-            background: var(--bg);
-            padding: 0.4rem 0.9rem;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.25s ease;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(24px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-content {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 3rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: slideUp 0.25s ease;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1.3rem;
-            right: 1.3rem;
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 2rem;
-            height: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-close:hover {
-            color: var(--text);
-            transform: rotate(90deg);
-        }
-
-        .modal-title {
-            font-size: 2rem;
+        .project-card h3 {
+            font-size: 1.25rem;
             font-weight: 900;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
-        .modal-description {
+        .project-card p {
             color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
+            margin-bottom: 1.25rem;
         }
 
-        .modal-tech {
-            margin-bottom: 2rem;
-        }
-
-        .modal-tech-title {
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--accent-3);
-            margin-bottom: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        .modal-tech-list {
+        .project-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.6rem;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
         }
 
-        .modal-tech-tag {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 0.5rem 0.9rem;
-            border-radius: 6px;
+        .tag {
             font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        .modal-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .modal-btn {
-            flex: 1;
-            padding: 0.85rem 1.4rem;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .modal-btn-primary {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            color: white;
-        }
-
-        .modal-btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.3);
-        }
-
-        .modal-btn-secondary {
-            background: var(--bg);
+            padding: 0.25rem 0.55rem;
+            border-radius: 999px;
             border: 1px solid var(--border);
+            color: var(--text-secondary);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
             color: var(--text);
+            border: 1px solid var(--border);
+            padding: 0.6rem 0.95rem;
+            border-radius: 10px;
+            font-weight: 800;
+            background: rgba(255,255,255,0.02);
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
-        .modal-btn-secondary:hover {
-            border-color: var(--accent-1);
-            color: var(--accent-1);
+        .btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.6);
         }
 
-        /* Chess Section */
-        .chess-section {
-            background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+        .github-activity {
+            margin: 4rem 0;
+        }
+
+        .github-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+
+        .github-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-top: 0.75rem;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .github-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 4rem;
-            margin-bottom: 10rem;
-            position: relative;
-            overflow: hidden;
-            color: white;
+            padding: 1.5rem;
+            transition: transform 0.25s ease, border-color 0.25s ease;
         }
 
-        .chess-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
+        .github-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(99, 102, 241, 0.5);
         }
 
-        .chess-header {
+        .github-card-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3rem;
-            position: relative;
-            z-index: 1;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
         }
 
-        .chess-header h2 {
-            font-size: 2.4rem;
-            font-weight: 900;
-        }
-
-        .chess-link {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            padding: 0.8rem 1.6rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .chess-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .chess-stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.8rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .chess-stat-card {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .chess-stat-card:hover {
-            background: rgba(255, 255, 255, 0.18);
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        .chess-stat-label {
+        .github-pill {
             font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 0.8rem;
-            opacity: 0.9;
-            font-weight: 600;
+            padding: 0.35rem 0.65rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(99, 102, 241, 0.08);
         }
 
-        .chess-stat-value {
-            font-size: 2.8rem;
-            font-weight: 900;
-            margin-bottom: 0.4rem;
+        .github-commit-title {
+            font-weight: 800;
+            font-size: 1.05rem;
+            line-height: 1.3;
+            margin: 0.25rem 0 0.75rem;
         }
 
-        .chess-stat-secondary {
-            font-size: 0.9rem;
+        .github-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1rem;
             opacity: 0.85;
+            font-size: 0.92rem;
         }
 
-        /* Footer */
-        footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: 4rem 2rem;
-            margin-top: 10rem;
+        .github-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
-        .footer-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h4 {
-            font-size: 0.9rem;
-            margin-bottom: 1.3rem;
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.02);
+            transition: transform 0.2s ease, border-color 0.2s ease;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #0ea5e9;
+        }
+
+        .github-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.6);
+        }
+
+        .github-muted {
+            opacity: 0.75;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            color: var(--text-secondary);
         }
 
         .footer-links {
+            margin-top: 1rem;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
-            color: var(--text-secondary);
+            color: var(--text);
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            font-weight: 800;
+            border: 1px solid var(--border);
+            padding: 0.55rem 0.9rem;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.02);
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
         .footer-links a:hover {
-            color: #6366f1;
-            transform: translateX(4px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            transform: translateY(-2px);
+            border-color: rgba(236, 72, 153, 0.5);
         }
 
         @media (max-width: 768px) {
@@ -620,382 +398,356 @@
                 font-size: 2.2rem;
             }
 
-            .hero p {
-                font-size: 1rem;
+            main {
+                padding: 3rem 1.2rem;
             }
 
-            .section-title {
-                font-size: 1.8rem;
+            header {
+                gap: 1rem;
             }
 
-            .chess-section {
-                padding: 2.5rem;
-            }
-
-            .chess-stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .tech-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                padding: 2rem;
-                width: 95%;
-            }
-
-            .modal-links {
-                flex-direction: column;
+            .nav {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
+    <canvas id="bg-canvas"></canvas>
+
     <header>
         <div class="logo">>my_portfolio</div>
+
+        <nav class="nav">
+            <a href="#tech">Tech</a>
+            <a href="#projects">Projects</a>
+            <a href="#github-activity">GitHub</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <a class="nav-cta" href="assets/Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
     </header>
 
     <main>
         <section class="hero">
             <h1>Jotsaroop Singh</h1>
             <p>Second year Computer Science Honors student at University of Alberta.</p>
+
+            <div class="hero-actions">
+                <a class="hero-btn hero-btn-primary" href="#projects">View Projects</a>
+                <a class="hero-btn" href="#github-activity">Latest Commit</a>
+                <a class="hero-btn" href="https://github.com/JotsaroopSinghh" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a class="hero-btn" href="https://www.linkedin.com/in/jotsaroop-singh/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
         </section>
 
-        <section id="tech">
-            <h2 class="section-title">Technologies</h2>
+        <section class="tech-stack" id="tech">
+            <h2 class="section-title">Tech Stack</h2>
             <div class="tech-grid">
-                <div class="tech-category">
+                <div class="tech-card">
                     <h3>Languages</h3>
-                    <div class="tech-list">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">SQL</span>
-                    </div>
+                    <p>Python, JavaScript, C, C++, SQL</p>
                 </div>
-
-                <div class="tech-category">
-                    <h3>Frontend</h3>
-                    <div class="tech-list">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">HTML/CSS</span>
-                        <span class="tech-tag">Tailwind</span>
-                    </div>
+                <div class="tech-card">
+                    <h3>Frameworks</h3>
+                    <p>React, Node.js, Express, FastAPI</p>
                 </div>
-
-                <div class="tech-category">
-                    <h3>Backend & Data</h3>
-                    <div class="tech-list">
-                        <span class="tech-tag">Firebase</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
-                    </div>
+                <div class="tech-card">
+                    <h3>Tools</h3>
+                    <p>Git, GitHub</p>
                 </div>
-
-                <div class="tech-category">
-                    <h3>Tools & Platforms</h3>
-                    <div class="tech-list">
-                        <span class="tech-tag">Git/GitHub</span>
-                        <span class="tech-tag">Google Colab</span>
-                        <span class="tech-tag">VS Code</span>
-                    </div>
+                <div class="tech-card">
+                    <h3>Interests</h3>
+                    <p>Quant, fintech, building clean UI/UX</p>
                 </div>
             </div>
         </section>
 
-        <section id="projects">
+        <section class="projects" id="projects">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
-                <div class="project-card" onclick="openProjectModal(
-                    'Focus Tab',
-                    'A productivity-focused Chrome extension that transforms your new tab into a dashboard with Pomodoro timer, to-do list, weather, music, and customizable backgrounds.',
-                    ['HTML', 'CSS', 'JavaScript', 'APIs'],
-                    'https://github.com/JotsaroopSinghh/Focus-Tab',
-                    'https://chromewebstore.google.com/detail/focus-tab/leiofepjjglilgnegnnppaglgdnpieen'
-                )">
-                    <div class="project-image" >
-                        <img src="assets/unnamed.jpg" alt="Focus Tab">
+                <div class="project-card">
+                    <h3>Focus Tab</h3>
+                    <p>A productivity-focused new tab extension with useful widgets and a clean design.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">JS</span>
+                        <span class="tag">HTML and CSS</span>
                     </div>
-                    <div class="project-content">
-                        <h3>Focus Tab</h3>
-                        <p>Productivity Chrome extension new tab dashboard.</p>
-                        <div class="project-tech">
-                            <span class="project-tech-tag">HTML</span>
-                            <span class="project-tech-tag">CSS</span>
-                            <span class="project-tech-tag">JavaScript</span>
-                        </div>
+                    <div class="project-actions">
+                        <a class="btn" href="https://github.com/JotsaroopSinghh/Focus-Tab" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a class="btn" href="https://chromewebstore.google.com/detail/focus-tab/leiofepjjglilgnegnnppaglgdnpieen" target="_blank" rel="noopener noreferrer">Live</a>
                     </div>
                 </div>
 
-                <div class="project-card" onclick="openProjectModal(
-                    'Project 2',
-                    'Coming soon. Placeholder for a future project. Replace this text and links once the project is ready.',
-                    ['-'],
-                    '#',
-                    '#'
-                )">
-                    <div class="project-image"></div>
-                    <div class="project-content">
-                        <h3>Project 2</h3>
-                        <p>Lorem Ipsum</p>
-                        <div class="project-tech">
-                            <span class="project-tech-tag">1</span>
-                        </div>
+                <div class="project-card">
+                    <h3>Project 2</h3>
+                    <p>Lorem ipsum placeholder</p>
+                    <div class="project-tags">
+                        <span class="tag">Tag</span>
+                        <span class="tag">Tag</span>
+                        <span class="tag">Tag</span>
+                    </div>
+                    <div class="project-actions">
+                        <a class="btn" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a class="btn" href="#" target="_blank" rel="noopener noreferrer">Live</a>
                     </div>
                 </div>
 
-                <div class="project-card" onclick="openProjectModal(
-                    'Project 3',
-                    'Coming soon. Placeholder for a future project. Replace this text and links once the project is ready.',
-                    ['-'],
-                    '#',
-                    '#'
-                )">
-                    <div class="project-image"></div>
-                    <div class="project-content">
-                        <h3>Project 3</h3>
-                        <p>Lorem Ipsum</p>
-                        <div class="project-tech">
-                            <span class="project-tech-tag">1</span>
-                        </div>
+                <div class="project-card">
+                    <h3>Project 3</h3>
+                    <p>Lorem ipsum placeholder</p>
+                    <div class="project-tags">
+                        <span class="tag">Tag</span>
+                        <span class="tag">Tag</span>
+                        <span class="tag">Tag</span>
+                    </div>
+                    <div class="project-actions">
+                        <a class="btn" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a class="btn" href="#" target="_blank" rel="noopener noreferrer">Live</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="chess-section">
-            <div class="chess-header">
-                <h2>P.S. I'm learning chess.</h2>
-                <a href="https://www.chess.com/member/KnotJ" target="_blank" class="chess-link">Send a friend request!</a>
-            </div>
-            <div class="chess-stats-grid">
-                <div class="chess-stat-card">
-                    <div class="chess-stat-label">Rapid Rating</div>
-                    <div class="chess-stat-value">927</div>
-                    <div class="chess-stat-secondary">2,532 games</div>
+        <section class="github-activity" id="github-activity">
+            <h2 class="section-title">GitHub Stats</h2>
+
+            <div class="github-grid">
+                <!-- Streak Card -->
+                <div class="github-card">
+                    <div class="github-card-top">
+                        <span class="github-pill">🔥 Streak</span>
+                        <span class="github-muted">Live</span>
+                    </div>
+
+                    <img
+                        class="github-img"
+                        alt="GitHub Streak"
+                        src="https://streak-stats.demolab.com?user=JotsaroopSinghh&theme=transparent&hide_border=true"
+                        onerror="this.onerror=null;this.src='https://github-readme-stats.vercel.app/api?username=JotsaroopSinghh&show_icons=true&theme=transparent&hide_border=true';"
+                    />
+
+                    <div class="github-actions">
+                        <a class="github-btn" href="https://github.com/JotsaroopSinghh" target="_blank" rel="noopener noreferrer">Open GitHub</a>
+                    </div>
                 </div>
-                <div class="chess-stat-card">
-                    <div class="chess-stat-label">Rapid Win Rate</div>
-                    <div class="chess-stat-value">47.3%</div>
-                    <div class="chess-stat-secondary">1,197 wins</div>
+
+                <!-- Latest Commit Card -->
+                <div class="github-card" id="latestCommitCard">
+                    <div class="github-card-top">
+                        <span class="github-pill">📝 Latest Commit</span>
+                        <span class="github-muted" id="latestCommitWhen">Loading…</span>
+                    </div>
+
+                    <div class="github-commit-title" id="latestCommitMsg">Loading your latest commit…</div>
+
+                    <div class="github-meta">
+                        <div><strong>Repo:</strong> <span id="latestCommitRepo">—</span></div>
+                        <div><strong>Commits (7d):</strong> <span id="weeklyCommitsInline">—</span></div>
+                    </div>
+
+                    <div class="github-actions">
+                        <a class="github-btn" id="latestCommitLink" href="https://github.com/JotsaroopSinghh" target="_blank" rel="noopener noreferrer">View Commit</a>
+                        <a class="github-btn" id="latestRepoLink" href="https://github.com/JotsaroopSinghh" target="_blank" rel="noopener noreferrer">View Repo</a>
+                    </div>
                 </div>
-                <div class="chess-stat-card">
-                    <div class="chess-stat-label">Personal Best</div>
-                    <div class="chess-stat-value">1283</div>
-                    <div class="chess-stat-secondary">Peak Rapid</div>
+
+                <!-- Weekly Stats Card -->
+                <div class="github-card">
+                    <div class="github-card-top">
+                        <span class="github-pill">📊 Last 7 Days</span>
+                        <span class="github-muted">Public pushes</span>
+                    </div>
+
+                    <div class="github-commit-title" style="margin-bottom: 0.5rem;">
+                        <span id="weeklyCommitsBig">—</span> commits
+                    </div>
+                    <div class="github-actions">
+                        <a class="github-btn" href="https://github.com/JotsaroopSinghh?tab=overview" target="_blank" rel="noopener noreferrer">View Activity</a>
+                    </div>
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <div class="footer-links">
-                    <a href="mailto:jotsaroopsingh30@gmail.com">Email</a>
-                    <a href="#">Resume</a>
-                </div>
+        <div class="footer-content" id="contact">
+            <p>Let's connect.</p>
+            <div class="footer-links">
+                <a href="mailto:jotsaroopsingh30@gmail.com">Email</a>
+                <a href="assets/Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+                <a href="https://github.com/JotsaroopSinghh" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/jotsaroop-singh/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
-            <div class="footer-section">
-                <h4>Links</h4>
-                <div class="footer-links">
-                    <a href="https://github.com" target="_blank">GitHub</a>
-                    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&#128008;</p>
+            <p style="margin-top: 1.5rem;">&#128008;</p>
         </div>
     </footer>
 
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeProjectModal()">×</button>
-            <h2 class="modal-title" id="modalTitle">Project Title</h2>
-            <p class="modal-description" id="modalDescription">Project description goes here.</p>
-
-            <div class="modal-tech">
-                <div class="modal-tech-title">Technologies</div>
-                <div class="modal-tech-list" id="modalTechList"></div>
-            </div>
-
-            <div class="modal-links">
-                <a id="modalGithubBtn" href="#" class="modal-btn modal-btn-primary" target="_blank">View on GitHub</a>
-                <a id="modalLiveBtn" href="#" class="modal-btn modal-btn-secondary" target="_blank">Link</a>
-            </div>
-        </div>
-    </div>
-
     <script>
-        const heroSection = document.querySelector('.hero');
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.style.position = 'absolute';
-        canvas.style.top = '0';
-        canvas.style.left = '0';
-        canvas.style.pointerEvents = 'none';
-        canvas.style.zIndex = '0';
-        heroSection.style.position = 'relative';
-        heroSection.insertBefore(canvas, heroSection.firstChild);
-        
+        const canvas = document.getElementById("bg-canvas");
+        const ctx = canvas.getContext("2d");
+
+        let width, height;
         let particles = [];
-        
-        function resizeCanvas() {
-            canvas.width = heroSection.offsetWidth;
-            canvas.height = heroSection.offsetHeight;
+        const particleCount = 70;
+        const maxDist = 140;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-        
-        class NetworkParticle {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.vx = (Math.random() - 0.5) * 1.5;
-                this.vy = (Math.random() - 0.5) * 1.5;
-                this.size = Math.random() * 1.5 + 1;
-                this.life = 1;
-                this.decay = Math.random() * 0.005 + 0.002;
+
+        window.addEventListener("resize", resize);
+        resize();
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: random(0, width),
+                    y: random(0, height),
+                    vx: random(-0.6, 0.6),
+                    vy: random(-0.6, 0.6),
+                    r: random(1.0, 2.2)
+                });
             }
-            
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-                
-                this.x = Math.max(0, Math.min(canvas.width, this.x));
-                this.y = Math.max(0, Math.min(canvas.height, this.y));
-                
-                this.life -= this.decay;
-            }
-            
-            draw() {
-                ctx.fillStyle = `rgba(99, 102, 241, ${this.life * 0.6})`;
+        }
+
+        initParticles();
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(255,255,255,0.6)";
                 ctx.fill();
             }
-        }
-        
-        function initializeParticles() {
-            particles = [];
-            for (let i = 0; i < 12; i++) {
-                particles.push(new NetworkParticle(
-                    Math.random() * canvas.width,
-                    Math.random() * canvas.height
-                ));
-            }
-        }
-        initializeParticles();
-        
-        document.addEventListener('mousemove', (e) => {
-            const rect = heroSection.getBoundingClientRect();
-            
-            if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                if (Math.random() < 0.3) {
-                    particles.push(new NetworkParticle(
-                        e.clientX - rect.left + (Math.random() - 0.5) * 40,
-                        e.clientY - rect.top + (Math.random() - 0.5) * 40
-                    ));
-                }
-            }
-        });
-        
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            particles = particles.filter(p => p.life > 0);
-            if (particles.length < 12) {
-                particles.push(new NetworkParticle(
-                    Math.random() * canvas.width,
-                    Math.random() * canvas.height
-                ));
-            }
-            
-            particles.forEach(p => p.update());
-            
-            const connectionDistance = 150;
+
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < connectionDistance) {
-                        const opacity = (1 - distance / connectionDistance) * 0.3;
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * particles[i].life})`;
-                        ctx.lineWidth = 1;
+                    const p1 = particles[i];
+                    const p2 = particles[j];
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < maxDist) {
+                        const alpha = 1 - dist / maxDist;
                         ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${alpha * 0.22})`;
+                        ctx.lineWidth = 1;
                         ctx.stroke();
                     }
                 }
             }
-            
-            particles.forEach(p => p.draw());
-            
-            requestAnimationFrame(animate);
-        }
-        
-        animate();
 
-        function openProjectModal(title, description, technologies, githubLink, liveLink) {
-            const modal = document.getElementById('projectModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalDescription = document.getElementById('modalDescription');
-            const modalTechList = document.getElementById('modalTechList');
-            const modalGithubBtn = document.getElementById('modalGithubBtn');
-            const modalLiveBtn = document.getElementById('modalLiveBtn');
-
-            modalTitle.textContent = title;
-            modalDescription.textContent = description;
-
-            modalTechList.innerHTML = technologies
-                .map(tech => `<span class="modal-tech-tag">${tech}</span>`)
-                .join('');
-
-            modalGithubBtn.href = githubLink;
-            modalLiveBtn.href = liveLink;
-
-            modal.classList.add('active');
-
-            function handleBackdropClick(e) {
-                if (e.target === modal) closeProjectModal();
-            }
-            function handleEsc(e) {
-                if (e.key === 'Escape') closeProjectModal();
-            }
-
-            modal._backdropHandler = handleBackdropClick;
-            modal._escHandler = handleEsc;
-
-            modal.addEventListener('click', handleBackdropClick);
-            document.addEventListener('keydown', handleEsc);
+            requestAnimationFrame(draw);
         }
 
-        function closeProjectModal() {
-            const modal = document.getElementById('projectModal');
-            modal.classList.remove('active');
+        draw();
 
-            if (modal._backdropHandler) {
-                modal.removeEventListener('click', modal._backdropHandler);
-                modal._backdropHandler = null;
-            }
-            if (modal._escHandler) {
-                document.removeEventListener('keydown', modal._escHandler);
-                modal._escHandler = null;
+        const GITHUB_USERNAME = "JotsaroopSinghh";
+
+        async function loadGitHubActivity() {
+            const whenEl = document.getElementById("latestCommitWhen");
+            const msgEl = document.getElementById("latestCommitMsg");
+            const repoEl = document.getElementById("latestCommitRepo");
+            const commitLinkEl = document.getElementById("latestCommitLink");
+            const repoLinkEl = document.getElementById("latestRepoLink");
+            const weeklyInlineEl = document.getElementById("weeklyCommitsInline");
+            const weeklyBigEl = document.getElementById("weeklyCommitsBig");
+
+            try {
+                const cacheKey = "gh_events_cache_v1";
+                const cacheRaw = localStorage.getItem(cacheKey);
+                const cache = cacheRaw ? JSON.parse(cacheRaw) : null;
+
+                let events;
+
+                if (cache && cache.t && Array.isArray(cache.events) && (Date.now() - cache.t) < 10 * 60 * 1000) {
+                    events = cache.events;
+                } else {
+                    const eventsUrl = `https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`;
+                    const eventsRes = await fetch(eventsUrl, { headers: { "Accept": "application/vnd.github+json" } });
+
+                    if (!eventsRes.ok) {
+                        const remaining = eventsRes.headers.get("X-RateLimit-Remaining");
+                        if (eventsRes.status === 403 && remaining === "0") {
+                            throw new Error("rate_limited");
+                        }
+                        throw new Error("events_failed");
+                    }
+
+                    events = await eventsRes.json();
+                    localStorage.setItem(cacheKey, JSON.stringify({ t: Date.now(), events }));
+                }
+
+                const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+                let weeklyCommits = 0;
+
+                for (const e of events) {
+                    if (!e || e.type !== "PushEvent" || !e.created_at || !e.payload) continue;
+                    const t = new Date(e.created_at).getTime();
+                    if (t >= weekAgo) {
+                        const c = Array.isArray(e.payload.commits) ? e.payload.commits.length : 0;
+                        weeklyCommits += c;
+                    }
+                }
+
+                if (weeklyInlineEl) weeklyInlineEl.textContent = String(weeklyCommits);
+                if (weeklyBigEl) weeklyBigEl.textContent = String(weeklyCommits);
+
+                const push = events.find(e => e && e.type === "PushEvent" && e.repo && e.payload && Array.isArray(e.payload.commits) && e.payload.commits.length);
+                if (!push) throw new Error("no_push");
+
+                const fullRepoName = push.repo.name;
+                const latestCommit = push.payload.commits[push.payload.commits.length - 1];
+                const sha = latestCommit.sha;
+
+                repoEl.textContent = fullRepoName;
+                repoLinkEl.href = `https://github.com/${fullRepoName}`;
+                commitLinkEl.href = `https://github.com/${fullRepoName}/commit/${sha}`;
+
+                msgEl.textContent = (latestCommit.message || "Latest commit").split("\n")[0];
+
+                const d = new Date(push.created_at);
+                whenEl.textContent = d.toLocaleString(undefined, { year: "numeric", month: "short", day: "numeric" });
+            } catch (err) {
+                whenEl.textContent = "";
+                if (err && err.message === "rate_limited") {
+                    msgEl.textContent = "GitHub rate limit hit. Refresh in a bit.";
+                } else if (location.protocol === "file:") {
+                    msgEl.textContent = "Open this site via a local server to load GitHub activity.";
+                } else {
+                    msgEl.textContent = "Couldn't load GitHub activity right now.";
+                }
+                repoEl.textContent = GITHUB_USERNAME;
+                if (weeklyInlineEl) weeklyInlineEl.textContent = "—";
+                if (weeklyBigEl) weeklyBigEl.textContent = "—";
+                commitLinkEl.href = `https://github.com/${GITHUB_USERNAME}`;
+                repoLinkEl.href = `https://github.com/${GITHUB_USERNAME}`;
             }
         }
+
+        loadGitHubActivity();
     </script>
 </body>
 </html>
