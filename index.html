@@ -362,6 +362,106 @@
             font-size: 0.95rem;
         }
 
+
+        .project-preview {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: 1px dashed rgba(255,255,255,0.18);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.015);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(230,230,240,0.65);
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .project-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .terminal-section {
+            margin: 4.5rem 0;
+        }
+
+        .terminal {
+            background: rgba(0,0,0,0.35);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .terminal-title {
+            font-weight: 900;
+            color: rgba(230,230,240,0.85);
+            font-size: 0.92rem;
+            letter-spacing: 0.2px;
+        }
+
+        .terminal-body {
+            padding: 1.25rem 1.25rem 1.35rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.98rem;
+            line-height: 1.55;
+            color: rgba(230,230,240,0.92);
+            min-height: 320px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .terminal-body a {
+            color: rgba(99, 102, 241, 0.95);
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        .terminal-body a:hover {
+            text-decoration: underline;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            margin-left: 2px;
+            background: rgba(236, 72, 153, 0.7);
+            vertical-align: bottom;
+            animation: blink 1s steps(2, start) infinite;
+        }
+
+        @keyframes blink {
+            to { visibility: hidden; }
+        }
+
         footer {
             border-top: 1px solid var(--border);
             padding: 2.5rem 2rem;
@@ -421,7 +521,7 @@
         <nav class="nav">
             <a href="#tech">Tech</a>
             <a href="#projects">Projects</a>
-            <a href="#github-activity">GitHub</a>
+            <a href="#terminal">Terminal</a>
             <a href="#contact">Contact</a>
         </nav>
 
@@ -435,7 +535,7 @@
 
             <div class="hero-actions">
                 <a class="hero-btn hero-btn-primary" href="#projects">View Projects</a>
-                <a class="hero-btn" href="#github-activity">Latest Commit</a>
+                <a class="hero-btn" href="#terminal">Terminal</a>
                 <a class="hero-btn" href="https://github.com/JotsaroopSinghh" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a class="hero-btn" href="https://www.linkedin.com/in/jotsaroop-singh/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
@@ -467,12 +567,14 @@
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
+                    <div class="project-preview">Project Preview (Coming Soon)</div>
                     <h3>Focus Tab</h3>
-                    <p>A productivity-focused new tab extension with useful widgets and a clean design.</p>
+                    <p>A multi-widget Chrome new-tab extension that helps you stay focused with a Pomodoro timer, to-do list, music player, customizable backgrounds, weather, and daily quotes.</p>
                     <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">JS</span>
-                        <span class="tag">HTML and CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">Chrome Extension</span>
+                        <span class="tag">APIs</span>
                     </div>
                     <div class="project-actions">
                         <a class="btn" href="https://github.com/JotsaroopSinghh/Focus-Tab" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -481,96 +583,45 @@
                 </div>
 
                 <div class="project-card">
-                    <h3>Project 2</h3>
-                    <p>Lorem ipsum placeholder</p>
+                    <div class="project-preview">Project Preview (Coming Soon)</div>
+                    <h3>LifeLedger</h3>
+                    <p>A full-stack financial simulation platform that models long-term cash flow, debt, and investments. Uses Monte Carlo simulation for stochastic investment returns to estimate insolvency probability and net-worth outcome distributions.</p>
                     <div class="project-tags">
-                        <span class="tag">Tag</span>
-                        <span class="tag">Tag</span>
-                        <span class="tag">Tag</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">React</span>
+                        <span class="tag">NumPy</span>
+                        <span class="tag">Monte Carlo</span>
                     </div>
                     <div class="project-actions">
-                        <a class="btn" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a class="btn" href="#" target="_blank" rel="noopener noreferrer">Live</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Project 3</h3>
-                    <p>Lorem ipsum placeholder</p>
-                    <div class="project-tags">
-                        <span class="tag">Tag</span>
-                        <span class="tag">Tag</span>
-                        <span class="tag">Tag</span>
-                    </div>
-                    <div class="project-actions">
-                        <a class="btn" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a class="btn" href="#" target="_blank" rel="noopener noreferrer">Live</a>
+                        <a class="btn" href="https://github.com/JotsaroopSinghh/LifeLedger" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a class="btn" href="#" target="_blank" rel="noopener noreferrer" title="Replace # with your Render link">Live</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="github-activity" id="github-activity">
-            <h2 class="section-title">GitHub Stats</h2>
+        
+        <section class="terminal-section" id="terminal">
+            <h2 class="section-title">Terminal</h2>
 
-            <div class="github-grid">
-                <!-- Streak Card -->
-                <div class="github-card">
-                    <div class="github-card-top">
-                        <span class="github-pill">🔥 Streak</span>
-                        <span class="github-muted">Live</span>
+            <div class="terminal" aria-label="Terminal section with interactive style output">
+                <div class="terminal-header">
+                    <div class="terminal-dots" aria-hidden="true">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
                     </div>
-
-                    <img
-                        class="github-img"
-                        alt="GitHub Streak"
-                        src="https://streak-stats.demolab.com?user=JotsaroopSinghh&theme=transparent&hide_border=true"
-                        onerror="this.onerror=null;this.src='https://github-readme-stats.vercel.app/api?username=JotsaroopSinghh&show_icons=true&theme=transparent&hide_border=true';"
-                    />
-
-                    <div class="github-actions">
-                        <a class="github-btn" href="https://github.com/JotsaroopSinghh" target="_blank" rel="noopener noreferrer">Open GitHub</a>
-                    </div>
+                    <div class="terminal-title">jotsaroop@portfolio:~</div>
+                    <div style="width: 40px;"></div>
                 </div>
-
-                <!-- Latest Commit Card -->
-                <div class="github-card" id="latestCommitCard">
-                    <div class="github-card-top">
-                        <span class="github-pill">📝 Latest Commit</span>
-                        <span class="github-muted" id="latestCommitWhen">Loading…</span>
-                    </div>
-
-                    <div class="github-commit-title" id="latestCommitMsg">Loading your latest commit…</div>
-
-                    <div class="github-meta">
-                        <div><strong>Repo:</strong> <span id="latestCommitRepo">—</span></div>
-                        <div><strong>Commits (7d):</strong> <span id="weeklyCommitsInline">—</span></div>
-                    </div>
-
-                    <div class="github-actions">
-                        <a class="github-btn" id="latestCommitLink" href="https://github.com/JotsaroopSinghh" target="_blank" rel="noopener noreferrer">View Commit</a>
-                        <a class="github-btn" id="latestRepoLink" href="https://github.com/JotsaroopSinghh" target="_blank" rel="noopener noreferrer">View Repo</a>
-                    </div>
-                </div>
-
-                <!-- Weekly Stats Card -->
-                <div class="github-card">
-                    <div class="github-card-top">
-                        <span class="github-pill">📊 Last 7 Days</span>
-                        <span class="github-muted">Public pushes</span>
-                    </div>
-
-                    <div class="github-commit-title" style="margin-bottom: 0.5rem;">
-                        <span id="weeklyCommitsBig">—</span> commits
-                    </div>
-                    <div class="github-actions">
-                        <a class="github-btn" href="https://github.com/JotsaroopSinghh?tab=overview" target="_blank" rel="noopener noreferrer">View Activity</a>
-                    </div>
+                <div class="terminal-body">
+                    <span id="terminalOutput"></span><span id="terminalCursor" class="terminal-cursor"></span>
                 </div>
             </div>
         </section>
 
-    </main>
+</main>
 
     <footer>
         <div class="footer-content" id="contact">
@@ -664,90 +715,91 @@
 
         draw();
 
-        const GITHUB_USERNAME = "JotsaroopSinghh";
+        // Terminal typing animation
+        const terminalLines = [
+            "$ whoami",
+            "Jotsaroop Singh — CS Honors @ University of Alberta",
+            "",
+            "$ projects",
+            "- Focus Tab (Chrome Extension)",
+            "- LifeLedger (Financial Simulation Platform)",
+            "",
+            "$ skills",
+            "Python, JavaScript, FastAPI, React, NumPy",
+            "",
+            "$ links",
+            "GitHub: https://github.com/JotsaroopSinghh",
+            "Focus Tab: https://github.com/JotsaroopSinghh/Focus-Tab",
+            "LifeLedger: https://github.com/JotsaroopSinghh/LifeLedger",
+            "LinkedIn: https://www.linkedin.com/in/jotsaroop-singh/",
+            "Email: mailto:jotsaroopsingh30@gmail.com"
+        ];
 
-        async function loadGitHubActivity() {
-            const whenEl = document.getElementById("latestCommitWhen");
-            const msgEl = document.getElementById("latestCommitMsg");
-            const repoEl = document.getElementById("latestCommitRepo");
-            const commitLinkEl = document.getElementById("latestCommitLink");
-            const repoLinkEl = document.getElementById("latestRepoLink");
-            const weeklyInlineEl = document.getElementById("weeklyCommitsInline");
-            const weeklyBigEl = document.getElementById("weeklyCommitsBig");
+        const terminalEl = document.getElementById("terminalOutput");
+        const cursorEl = document.getElementById("terminalCursor");
 
-            try {
-                const cacheKey = "gh_events_cache_v1";
-                const cacheRaw = localStorage.getItem(cacheKey);
-                const cache = cacheRaw ? JSON.parse(cacheRaw) : null;
-
-                let events;
-
-                if (cache && cache.t && Array.isArray(cache.events) && (Date.now() - cache.t) < 10 * 60 * 1000) {
-                    events = cache.events;
-                } else {
-                    const eventsUrl = `https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`;
-                    const eventsRes = await fetch(eventsUrl, { headers: { "Accept": "application/vnd.github+json" } });
-
-                    if (!eventsRes.ok) {
-                        const remaining = eventsRes.headers.get("X-RateLimit-Remaining");
-                        if (eventsRes.status === 403 && remaining === "0") {
-                            throw new Error("rate_limited");
-                        }
-                        throw new Error("events_failed");
-                    }
-
-                    events = await eventsRes.json();
-                    localStorage.setItem(cacheKey, JSON.stringify({ t: Date.now(), events }));
-                }
-
-                const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
-                let weeklyCommits = 0;
-
-                for (const e of events) {
-                    if (!e || e.type !== "PushEvent" || !e.created_at || !e.payload) continue;
-                    const t = new Date(e.created_at).getTime();
-                    if (t >= weekAgo) {
-                        const c = Array.isArray(e.payload.commits) ? e.payload.commits.length : 0;
-                        weeklyCommits += c;
-                    }
-                }
-
-                if (weeklyInlineEl) weeklyInlineEl.textContent = String(weeklyCommits);
-                if (weeklyBigEl) weeklyBigEl.textContent = String(weeklyCommits);
-
-                const push = events.find(e => e && e.type === "PushEvent" && e.repo && e.payload && Array.isArray(e.payload.commits) && e.payload.commits.length);
-                if (!push) throw new Error("no_push");
-
-                const fullRepoName = push.repo.name;
-                const latestCommit = push.payload.commits[push.payload.commits.length - 1];
-                const sha = latestCommit.sha;
-
-                repoEl.textContent = fullRepoName;
-                repoLinkEl.href = `https://github.com/${fullRepoName}`;
-                commitLinkEl.href = `https://github.com/${fullRepoName}/commit/${sha}`;
-
-                msgEl.textContent = (latestCommit.message || "Latest commit").split("\n")[0];
-
-                const d = new Date(push.created_at);
-                whenEl.textContent = d.toLocaleString(undefined, { year: "numeric", month: "short", day: "numeric" });
-            } catch (err) {
-                whenEl.textContent = "";
-                if (err && err.message === "rate_limited") {
-                    msgEl.textContent = "GitHub rate limit hit. Refresh in a bit.";
-                } else if (location.protocol === "file:") {
-                    msgEl.textContent = "Open this site via a local server to load GitHub activity.";
-                } else {
-                    msgEl.textContent = "Couldn't load GitHub activity right now.";
-                }
-                repoEl.textContent = GITHUB_USERNAME;
-                if (weeklyInlineEl) weeklyInlineEl.textContent = "—";
-                if (weeklyBigEl) weeklyBigEl.textContent = "—";
-                commitLinkEl.href = `https://github.com/${GITHUB_USERNAME}`;
-                repoLinkEl.href = `https://github.com/${GITHUB_USERNAME}`;
-            }
+        function escapeHtml(s) {
+            return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
 
-        loadGitHubActivity();
+        function linkify(text) {
+            const safe = escapeHtml(text);
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            const mailtoRegex = /(mailto:[^\s]+)/g;
+            return safe
+                .replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+                .replace(mailtoRegex, '<a href="$1">$1</a>');
+        }
+
+        function typeTerminal(lines, { lineDelay = 220, charDelay = 16 } = {}) {
+            let lineIdx = 0;
+            let charIdx = 0;
+            let buffer = "";
+
+            function tick() {
+                if (!terminalEl) return;
+
+                if (lineIdx >= lines.length) {
+                    terminalEl.innerHTML = linkify(buffer);
+                    if (cursorEl) cursorEl.style.display = "none";
+                    return;
+                }
+
+                const current = lines[lineIdx];
+
+                if (charIdx < current.length) {
+                    buffer += current[charIdx];
+                    terminalEl.textContent = buffer;
+                    charIdx += 1;
+                    setTimeout(tick, charDelay);
+                } else {
+                    buffer += "\n";
+                    terminalEl.textContent = buffer;
+                    lineIdx += 1;
+                    charIdx = 0;
+                    setTimeout(tick, lineDelay);
+                }
+            }
+
+            tick();
+        }
+
+        // Start typing when terminal enters view
+        const terminalSection = document.getElementById("terminal");
+        if (terminalSection && "IntersectionObserver" in window) {
+            const obs = new IntersectionObserver((entries) => {
+                const e = entries[0];
+                if (e.isIntersecting) {
+                    obs.disconnect();
+                    typeTerminal(terminalLines);
+                }
+            }, { threshold: 0.25 });
+            obs.observe(terminalSection);
+        } else {
+            // Fallback
+            typeTerminal(terminalLines);
+        }
+
     </script>
 </body>
 </html>
