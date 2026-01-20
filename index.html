@@ -438,6 +438,33 @@
             word-break: break-word;
         }
 
+        .terminal-output {
+            white-space: pre-wrap;
+        }
+
+        .terminal-input-line {
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+            margin-top: 1rem;
+        }
+
+        .terminal-prompt {
+            color: rgba(34, 197, 94, 0.95);
+            font-weight: 900;
+            white-space: pre;
+        }
+
+        .terminal-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: rgba(230,230,240,0.92);
+            font: inherit;
+            caret-color: rgba(236, 72, 153, 0.85);
+        }
+
         .terminal-body a {
             color: rgba(99, 102, 241, 0.95);
             text-decoration: none;
@@ -448,18 +475,8 @@
             text-decoration: underline;
         }
 
-        .terminal-cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            margin-left: 2px;
-            background: rgba(236, 72, 153, 0.7);
-            vertical-align: bottom;
-            animation: blink 1s steps(2, start) infinite;
-        }
-
-        @keyframes blink {
-            to { visibility: hidden; }
+        .terminal-hint {
+            color: rgba(230,230,240,0.65);
         }
 
         footer {
@@ -615,8 +632,13 @@
                     <div class="terminal-title">jotsaroop@portfolio:~</div>
                     <div style="width: 40px;"></div>
                 </div>
-                <div class="terminal-body">
-                    <span id="terminalOutput"></span><span id="terminalCursor" class="terminal-cursor"></span>
+                <div class="terminal-body" id="terminalShell" role="application" aria-label="Interactive terminal">
+                    <div id="terminalOutput" class="terminal-output"></div>
+                    <div class="terminal-input-line" aria-label="Terminal input">
+                        <span class="terminal-prompt" id="terminalPrompt">$</span>
+                        <input id="terminalInput" class="terminal-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Type a command and press Enter" />
+                    </div>
+                    <div class="terminal-hint" id="terminalHint">Tip: type <strong>help</strong> and press Enter</div>
                 </div>
             </div>
         </section>
@@ -715,68 +737,132 @@
 
         draw();
 
-        // Terminal typing animation
-        const terminalLines = [
-            "$ whoami",
-            "Jotsaroop Singh — CS Honors @ University of Alberta",
-            "",
-            "$ projects",
-            "- Focus Tab (Chrome Extension)",
-            "- LifeLedger (Financial Simulation Platform)",
-            "",
-            "$ skills",
-            "Python, JavaScript, FastAPI, React, NumPy",
-            "",
-            "$ links",
-            "GitHub: https://github.com/JotsaroopSinghh",
-            "Focus Tab: https://github.com/JotsaroopSinghh/Focus-Tab",
-            "LifeLedger: https://github.com/JotsaroopSinghh/LifeLedger",
-            "LinkedIn: https://www.linkedin.com/in/jotsaroop-singh/",
-            "Email: mailto:jotsaroopsingh30@gmail.com"
-        ];
-
-        const terminalEl = document.getElementById("terminalOutput");
-        const cursorEl = document.getElementById("terminalCursor");
+        // Interactive terminal (GitHub Pages-safe)
+        const terminalOutputEl = document.getElementById("terminalOutput");
+        const terminalInputEl = document.getElementById("terminalInput");
+        const terminalShellEl = document.getElementById("terminalShell");
+        const terminalHintEl = document.getElementById("terminalHint");
 
         function escapeHtml(s) {
-            return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            return s
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\"/g, "&quot;")
+                .replace(/'/g, "&#39;");
         }
 
         function linkify(text) {
             const safe = escapeHtml(text);
-            const urlRegex = /(https?:\/\/[^\s]+)/g;
-            const mailtoRegex = /(mailto:[^\s]+)/g;
+            const urlRegex = /(https?:\/\/[\w\-._~:/?#\[\]@!$&'()*+,;=%]+)/g;
+            const mailtoRegex = /(mailto:[\w.\-+]+@[\w.\-]+)/g;
             return safe
                 .replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
                 .replace(mailtoRegex, '<a href="$1">$1</a>');
         }
 
-        function typeTerminal(lines, { lineDelay = 220, charDelay = 16 } = {}) {
+        function appendLine(text, { link = false, dim = false } = {}) {
+            if (!terminalOutputEl) return;
+            const div = document.createElement("div");
+            div.innerHTML = link ? linkify(text) : escapeHtml(text);
+            if (dim) div.style.color = "rgba(230,230,240,0.65)";
+            terminalOutputEl.appendChild(div);
+            terminalOutputEl.scrollTop = terminalOutputEl.scrollHeight;
+        }
+
+        function clearTerminal() {
+            if (!terminalOutputEl) return;
+            terminalOutputEl.innerHTML = "";
+        }
+
+        const COMMANDS = {
+            help: () => {
+                appendLine("Available commands:", { dim: true });
+                appendLine("  help        Show this message", { dim: true });
+                appendLine("  whoami      Quick intro", { dim: true });
+                appendLine("  projects    Project list", { dim: true });
+                appendLine("  skills      Tech stack", { dim: true });
+                appendLine("  links       Links", { dim: true });
+                appendLine("  clear       Clear terminal", { dim: true });
+            },
+            whoami: () => {
+                appendLine("Jotsaroop Singh — CS (Honors) @ University of Alberta");
+                appendLine("Interests: SWE, data/ML, fintech", { dim: true });
+            },
+            projects: () => {
+                appendLine("Focus Tab — Chrome Extension");
+                appendLine("LifeLedger — Financial Simulation Platform");
+                appendLine("Tip: run 'links' for GitHub/live links", { dim: true });
+            },
+            skills: () => {
+                appendLine("Python, JavaScript, FastAPI, React, NumPy");
+            },
+            links: () => {
+                appendLine("GitHub: https://github.com/JotsaroopSinghh", { link: true });
+                appendLine("Focus Tab: https://github.com/JotsaroopSinghh/Focus-Tab", { link: true });
+                appendLine("LifeLedger: https://github.com/JotsaroopSinghh/LifeLedger", { link: true });
+                appendLine("LinkedIn: https://www.linkedin.com/in/jotsaroop-singh/", { link: true });
+                appendLine("Email: mailto:jotsaroopsingh30@gmail.com", { link: true });
+            },
+            clear: () => {
+                clearTerminal();
+            }
+        };
+
+        const history = [];
+        let historyIndex = -1;
+
+        function runCommand(raw) {
+            const cmd = raw.trim();
+            if (!cmd) return;
+
+            appendLine(`$ ${cmd}`);
+
+            const base = cmd.split(/\s+/)[0].toLowerCase();
+            if (base in COMMANDS) {
+                COMMANDS[base]();
+            } else {
+                appendLine(`Command not found: ${base}`, { dim: true });
+                appendLine("Type 'help' to see available commands", { dim: true });
+            }
+        }
+
+        const bootLines = [
+            "> connecting...",
+            "> loaded profile",
+            "> ready",
+            "",
+            "Type 'help' and press Enter"
+        ];
+
+        function typeBoot(lines, { lineDelay = 180, charDelay = 14 } = {}) {
+            if (!terminalOutputEl) return;
+            clearTerminal();
             let lineIdx = 0;
             let charIdx = 0;
-            let buffer = "";
+            let currentLine = "";
+            let lineDiv = document.createElement("div");
+            terminalOutputEl.appendChild(lineDiv);
 
             function tick() {
-                if (!terminalEl) return;
-
                 if (lineIdx >= lines.length) {
-                    terminalEl.innerHTML = linkify(buffer);
-                    if (cursorEl) cursorEl.style.display = "none";
+                    if (terminalHintEl) terminalHintEl.style.display = "block";
                     return;
                 }
 
-                const current = lines[lineIdx];
-
-                if (charIdx < current.length) {
-                    buffer += current[charIdx];
-                    terminalEl.textContent = buffer;
+                const target = lines[lineIdx];
+                if (charIdx < target.length) {
+                    currentLine += target[charIdx];
+                    lineDiv.textContent = currentLine;
                     charIdx += 1;
                     setTimeout(tick, charDelay);
                 } else {
-                    buffer += "\n";
-                    terminalEl.textContent = buffer;
                     lineIdx += 1;
                     charIdx = 0;
+                    currentLine = "";
+                    lineDiv = document.createElement("div");
+                    terminalOutputEl.appendChild(lineDiv);
+                    terminalOutputEl.scrollTop = terminalOutputEl.scrollHeight;
                     setTimeout(tick, lineDelay);
                 }
             }
@@ -784,20 +870,61 @@
             tick();
         }
 
-        // Start typing when terminal enters view
+        function focusTerminal() {
+            if (terminalInputEl) terminalInputEl.focus();
+        }
+
+        if (terminalShellEl) {
+            terminalShellEl.addEventListener("mousedown", () => {
+                setTimeout(focusTerminal, 0);
+            });
+        }
+
+        if (terminalInputEl) {
+            terminalInputEl.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    const value = terminalInputEl.value;
+                    if (value.trim().length > 0) {
+                        history.push(value);
+                        historyIndex = history.length;
+                    }
+                    if (terminalHintEl) terminalHintEl.style.display = "none";
+                    runCommand(value);
+                    terminalInputEl.value = "";
+                }
+
+                if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    if (history.length === 0) return;
+                    historyIndex = Math.max(0, historyIndex - 1);
+                    terminalInputEl.value = history[historyIndex] || "";
+                }
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    if (history.length === 0) return;
+                    historyIndex = Math.min(history.length, historyIndex + 1);
+                    terminalInputEl.value = history[historyIndex] || "";
+                }
+            });
+        }
+
         const terminalSection = document.getElementById("terminal");
         if (terminalSection && "IntersectionObserver" in window) {
             const obs = new IntersectionObserver((entries) => {
                 const e = entries[0];
                 if (e.isIntersecting) {
                     obs.disconnect();
-                    typeTerminal(terminalLines);
+                    if (terminalHintEl) terminalHintEl.style.display = "none";
+                    typeBoot(bootLines);
+                    setTimeout(focusTerminal, 500);
                 }
             }, { threshold: 0.25 });
             obs.observe(terminalSection);
         } else {
-            // Fallback
-            typeTerminal(terminalLines);
+            if (terminalHintEl) terminalHintEl.style.display = "none";
+            typeBoot(bootLines);
         }
 
     </script>
