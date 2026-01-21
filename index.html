@@ -26,19 +26,16 @@
         }
 
         body {
-            background: var(--bg);
+            background:
+                radial-gradient(1200px 800px at 20% 20%, rgba(99,102,241,0.10), transparent 60%),
+                radial-gradient(1000px 700px at 80% 30%, rgba(236,72,153,0.08), transparent 60%),
+                radial-gradient(900px 600px at 50% 80%, rgba(99,102,241,0.06), transparent 65%),
+                #0b0f19;
+            background-size: 200% 200%;
+            animation: breathe 24s ease-in-out infinite;
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        canvas#bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            width: 100%;
-            height: 100%;
         }
 
         header {
@@ -237,12 +234,18 @@
         }
 
         .tag {
-            font-size: 0.8rem;
-            padding: 0.25rem 0.55rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 32px;
+            padding: 0 0.75rem;
             border-radius: 999px;
             border: 1px solid var(--border);
             color: var(--text-secondary);
             background: rgba(255,255,255,0.02);
+            font-size: 0.78rem;
+            line-height: 1;
+            white-space: nowrap;
         }
 
         .project-actions {
@@ -391,11 +394,33 @@
         }
 
         .terminal {
-            background: rgba(0,0,0,0.35);
-            border: 1px solid var(--border);
+            position: relative;
+            background: radial-gradient(1200px 600px at 20% 0%, rgba(99,102,241,0.15), transparent 60%),
+                        radial-gradient(900px 500px at 80% 20%, rgba(236,72,153,0.12), transparent 55%),
+                        rgba(0,0,0,0.45);
+            border: 1px solid rgba(255,255,255,0.10);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+            box-shadow: 0 20px 70px rgba(0,0,0,0.5);
+        }
+
+        /* Subtle scanlines + noise overlay */
+        .terminal::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(to bottom, rgba(255,255,255,0.035), rgba(255,255,255,0.0) 35%),
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(255,255,255,0.04) 0px,
+                    rgba(255,255,255,0.04) 1px,
+                    rgba(0,0,0,0) 3px,
+                    rgba(0,0,0,0) 6px
+                );
+            opacity: 0.08;
+            mix-blend-mode: overlay;
         }
 
         .terminal-header {
@@ -403,8 +428,8 @@
             align-items: center;
             justify-content: space-between;
             padding: 0.85rem 1rem;
-            border-bottom: 1px solid var(--border);
-            background: rgba(255,255,255,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.10);
+            background: rgba(255,255,255,0.03);
         }
 
         .terminal-dots {
@@ -422,18 +447,23 @@
 
         .terminal-title {
             font-weight: 900;
-            color: rgba(230,230,240,0.85);
+            color: rgba(230,230,240,0.88);
             font-size: 0.92rem;
             letter-spacing: 0.2px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         }
 
         .terminal-body {
-            padding: 1.25rem 1.25rem 1.35rem;
+            position: relative;
+            padding: 1.1rem 1.25rem 1.2rem;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             font-size: 0.98rem;
-            line-height: 1.55;
+            line-height: 1.6;
             color: rgba(230,230,240,0.92);
-            min-height: 320px;
+            min-height: 340px;
+            height: 420px;
+            overflow-y: auto;
+            scrollbar-gutter: stable;
             white-space: pre-wrap;
             word-break: break-word;
         }
@@ -442,11 +472,15 @@
             white-space: pre-wrap;
         }
 
+        .terminal-output .dim {
+            color: rgba(230,230,240,0.62);
+        }
+
         .terminal-input-line {
             display: flex;
             gap: 0.6rem;
             align-items: flex-start;
-            margin-top: 1rem;
+            margin-top: 0.9rem;
         }
 
         .terminal-prompt {
@@ -465,6 +499,21 @@
             caret-color: rgba(236, 72, 153, 0.85);
         }
 
+        /* Fake block cursor */
+        .terminal-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.15em;
+            background: rgba(236, 72, 153, 0.85);
+            margin-left: 2px;
+            transform: translateY(2px);
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
         .terminal-body a {
             color: rgba(99, 102, 241, 0.95);
             text-decoration: none;
@@ -477,6 +526,7 @@
 
         .terminal-hint {
             color: rgba(230,230,240,0.65);
+            margin-top: 0.75rem;
         }
 
         footer {
@@ -510,7 +560,14 @@
             border-color: rgba(236, 72, 153, 0.5);
         }
 
-        @media (max-width: 768px) {
+        
+        @keyframes breathe {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+@media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.2rem;
             }
@@ -530,9 +587,7 @@
     </style>
 </head>
 <body>
-    <canvas id="bg-canvas"></canvas>
-
-    <header>
+        <header>
         <div class="logo">>my_portfolio</div>
 
         <nav class="nav">
@@ -584,7 +639,29 @@
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-preview">Project Preview (Coming Soon)</div>
+                    <div class="project-preview">
+                        <img src="assets/2.jpg" alt="LifeLedger project preview" onerror="this.style.display='none'; this.parentElement.textContent='Project Preview (Coming Soon)';" />
+                    </div>
+                    <h3>LifeLedger</h3>
+                    <p>A full-stack financial simulation platform that models long-term cash flow, debt, and investments. Uses Monte Carlo simulation for stochastic investment returns to estimate insolvency probability and net-worth outcome distributions.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">React</span>
+                        <span class="tag">NumPy</span>
+                        <span class="tag">Monte Carlo</span>
+                    </div>
+                    <div class="project-actions">
+                        <a class="btn" href="https://github.com/JotsaroopSinghh/LifeLedger" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a class="btn" href="https://lifeledger-1.onrender.com/" target="_blank" rel="noopener noreferrer">Live</a>
+                    </div>
+                </div>
+
+
+                <div class="project-card">
+                    <div class="project-preview">
+                        <img src="assets/1.jpg" alt="Focus Tab project preview" onerror="this.style.display='none'; this.parentElement.textContent='Project Preview (Coming Soon)';" />
+                    </div>
                     <h3>Focus Tab</h3>
                     <p>A multi-widget Chrome new-tab extension that helps you stay focused with a Pomodoro timer, to-do list, music player, customizable backgrounds, weather, and daily quotes.</p>
                     <div class="project-tags">
@@ -598,24 +675,7 @@
                         <a class="btn" href="https://chromewebstore.google.com/detail/focus-tab/leiofepjjglilgnegnnppaglgdnpieen" target="_blank" rel="noopener noreferrer">Live</a>
                     </div>
                 </div>
-
-                <div class="project-card">
-                    <div class="project-preview">Project Preview (Coming Soon)</div>
-                    <h3>LifeLedger</h3>
-                    <p>A full-stack financial simulation platform that models long-term cash flow, debt, and investments. Uses Monte Carlo simulation for stochastic investment returns to estimate insolvency probability and net-worth outcome distributions.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">FastAPI</span>
-                        <span class="tag">React</span>
-                        <span class="tag">NumPy</span>
-                        <span class="tag">Monte Carlo</span>
-                    </div>
-                    <div class="project-actions">
-                        <a class="btn" href="https://github.com/JotsaroopSinghh/LifeLedger" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a class="btn" href="#" target="_blank" rel="noopener noreferrer" title="Replace # with your Render link">Live</a>
-                    </div>
-                </div>
-            </div>
+</div>
         </section>
 
         
@@ -635,7 +695,7 @@
                 <div class="terminal-body" id="terminalShell" role="application" aria-label="Interactive terminal">
                     <div id="terminalOutput" class="terminal-output"></div>
                     <div class="terminal-input-line" aria-label="Terminal input">
-                        <span class="terminal-prompt" id="terminalPrompt">$</span>
+                        <span class="terminal-prompt" id="terminalPrompt">jotsaroop@portfolio:~$</span>
                         <input id="terminalInput" class="terminal-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Type a command and press Enter" />
                     </div>
                     <div class="terminal-hint" id="terminalHint">Tip: type <strong>help</strong> and press Enter</div>
@@ -659,83 +719,6 @@
     </footer>
 
     <script>
-        const canvas = document.getElementById("bg-canvas");
-        const ctx = canvas.getContext("2d");
-
-        let width, height;
-        let particles = [];
-        const particleCount = 70;
-        const maxDist = 140;
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-
-        window.addEventListener("resize", resize);
-        resize();
-
-        function random(min, max) {
-            return Math.random() * (max - min) + min;
-        }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: random(0, width),
-                    y: random(0, height),
-                    vx: random(-0.6, 0.6),
-                    vy: random(-0.6, 0.6),
-                    r: random(1.0, 2.2)
-                });
-            }
-        }
-
-        initParticles();
-
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-
-            for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
-
-                p.x += p.vx;
-                p.y += p.vy;
-
-                if (p.x < 0 || p.x > width) p.vx *= -1;
-                if (p.y < 0 || p.y > height) p.vy *= -1;
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = "rgba(255,255,255,0.6)";
-                ctx.fill();
-            }
-
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p1 = particles[i];
-                    const p2 = particles[j];
-                    const dx = p1.x - p2.x;
-                    const dy = p1.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < maxDist) {
-                        const alpha = 1 - dist / maxDist;
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${alpha * 0.22})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            requestAnimationFrame(draw);
-        }
-
-        draw();
 
         // Interactive terminal (GitHub Pages-safe)
         const terminalOutputEl = document.getElementById("terminalOutput");
@@ -743,18 +726,30 @@
         const terminalShellEl = document.getElementById("terminalShell");
         const terminalHintEl = document.getElementById("terminalHint");
 
+        const PROMPT = "jotsaroop@portfolio:~$";
+        const RESUME_URL = "assets/Resume.pdf";
+        const LINKS = {
+            github: "https://github.com/JotsaroopSinghh",
+            linkedin: "https://www.linkedin.com/in/jotsaroop-singh/",
+            email: "mailto:jotsaroopsingh30@gmail.com",
+            focusTabRepo: "https://github.com/JotsaroopSinghh/Focus-Tab",
+            focusTabLive: "https://chromewebstore.google.com/detail/focus-tab/leiofepjjglilgnegnnppaglgdnpieen",
+            lifeLedgerRepo: "https://github.com/JotsaroopSinghh/LifeLedger",
+            lifeLedgerLive: "https://lifeledger-1.onrender.com/"
+        };
+
         function escapeHtml(s) {
             return s
                 .replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;")
-                .replace(/\"/g, "&quot;")
+                .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#39;");
         }
 
         function linkify(text) {
             const safe = escapeHtml(text);
-            const urlRegex = /(https?:\/\/[\w\-._~:/?#\[\]@!$&'()*+,;=%]+)/g;
+            const urlRegex = /(https?:\/\/[\w\-._~:\/\/?#\[\]@!$&'()*+,;=%]+)/g;
             const mailtoRegex = /(mailto:[\w.\-+]+@[\w.\-]+)/g;
             return safe
                 .replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
@@ -765,9 +760,9 @@
             if (!terminalOutputEl) return;
             const div = document.createElement("div");
             div.innerHTML = link ? linkify(text) : escapeHtml(text);
-            if (dim) div.style.color = "rgba(230,230,240,0.65)";
+            if (dim) div.classList.add("dim");
             terminalOutputEl.appendChild(div);
-            terminalOutputEl.scrollTop = terminalOutputEl.scrollHeight;
+            terminalShellEl.scrollTop = terminalShellEl.scrollHeight;
         }
 
         function clearTerminal() {
@@ -775,40 +770,132 @@
             terminalOutputEl.innerHTML = "";
         }
 
+        function openUrl(url) {
+            window.open(url, "_blank", "noopener,noreferrer");
+        }
+
+        const ASCII_NEOFETCH = [
+            "     JJJJJJJJJ ",
+            "          J    ",
+            "          J    ",
+            "          J    ",
+            "    J     J    ",
+            "     JJJJJ     ",
+        ];
+
+        function printProfile() {
+            const info = [
+                "",
+                `User: Jotsaroop Singh`,
+                `OS: GitHub Pages`,
+                `Shell: portfolio-terminal`,
+                `Location: Edmonton, AB`,
+                `Focus: SWE / Data / FinTech`,
+                `Projects: LifeLedger, Focus Tab`,
+                `Links: ${LINKS.github}`,
+                ""
+            ];
+
+            const left = ASCII_NEOFETCH;
+            const right = info;
+            const rows = Math.max(left.length, right.length);
+            for (let i = 0; i < rows; i++) {
+                const l = left[i] || "";
+                const r = right[i] || "";
+                appendLine(l.padEnd(18, " ") + r);
+            }
+        }
+
         const COMMANDS = {
             help: () => {
                 appendLine("Available commands:", { dim: true });
-                appendLine("  help        Show this message", { dim: true });
-                appendLine("  whoami      Quick intro", { dim: true });
-                appendLine("  projects    Project list", { dim: true });
-                appendLine("  skills      Tech stack", { dim: true });
-                appendLine("  links       Links", { dim: true });
-                appendLine("  clear       Clear terminal", { dim: true });
+                appendLine("  help            Show this message", { dim: true });
+                appendLine("  whoami          Quick intro", { dim: true });
+                appendLine("  projects        Project list", { dim: true });
+                appendLine("  skills          Tech stack", { dim: true });
+                appendLine("  links           Links", { dim: true });
+                appendLine("  profile         Show profile card", { dim: true });
+                appendLine("  ls              List files", { dim: true });
+                appendLine("  cat <file>      Read a file", { dim: true });
+                appendLine("  open <target>   Open link (resume | github | linkedin | lifeledger | focustab)", { dim: true });
+                appendLine("  clear           Clear terminal", { dim: true });
             },
             whoami: () => {
                 appendLine("Jotsaroop Singh — CS (Honors) @ University of Alberta");
                 appendLine("Interests: SWE, data/ML, fintech", { dim: true });
             },
             projects: () => {
-                appendLine("Focus Tab — Chrome Extension");
                 appendLine("LifeLedger — Financial Simulation Platform");
+                appendLine("Focus Tab — Chrome Extension");
                 appendLine("Tip: run 'links' for GitHub/live links", { dim: true });
             },
             skills: () => {
                 appendLine("Python, JavaScript, FastAPI, React, NumPy");
             },
             links: () => {
-                appendLine("GitHub: https://github.com/JotsaroopSinghh", { link: true });
-                appendLine("Focus Tab: https://github.com/JotsaroopSinghh/Focus-Tab", { link: true });
-                appendLine("LifeLedger: https://github.com/JotsaroopSinghh/LifeLedger", { link: true });
-                appendLine("LinkedIn: https://www.linkedin.com/in/jotsaroop-singh/", { link: true });
-                appendLine("Email: mailto:jotsaroopsingh30@gmail.com", { link: true });
+                appendLine(`GitHub: ${LINKS.github}`, { link: true });
+                appendLine(`LifeLedger (live): ${LINKS.lifeLedgerLive}`, { link: true });
+                appendLine(`LifeLedger (repo): ${LINKS.lifeLedgerRepo}`, { link: true });
+                appendLine(`Focus Tab (live): ${LINKS.focusTabLive}`, { link: true });
+                appendLine(`Focus Tab (repo): ${LINKS.focusTabRepo}`, { link: true });
+                appendLine(`LinkedIn: ${LINKS.linkedin}`, { link: true });
+                appendLine(`Email: ${LINKS.email}`, { link: true });
+                appendLine(`Resume: ${location.origin}${location.pathname.replace(/\/?$/, '/')}${RESUME_URL}`, { link: true });
+            },
+            profile: () => {
+                printProfile();
+            },
+            ls: () => {
+                appendLine("about.txt   projects.txt   links.txt   resume.pdf", { dim: true });
+            },
+            cat: (args) => {
+                const file = (args[0] || "").toLowerCase();
+                if (!file) {
+                    appendLine("Usage: cat <file>", { dim: true });
+                    return;
+                }
+                if (file === "about.txt") {
+                    appendLine("Jotsaroop Singh — CS (Honors) @ University of Alberta");
+                    appendLine("Interested in SWE, data/ML, and fintech.");
+                } else if (file === "projects.txt") {
+                    appendLine("- LifeLedger: Monte Carlo investment returns + long-term financial simulation");
+                    appendLine("- Focus Tab: Chrome new-tab productivity extension");
+                } else if (file === "links.txt") {
+                    COMMANDS.links();
+                } else if (file === "resume.pdf" || file === "resume") {
+                    appendLine(`Resume is available at: ${RESUME_URL}`, { dim: true });
+                    openUrl(RESUME_URL);
+                } else {
+                    appendLine(`cat: ${file}: No such file`, { dim: true });
+                }
+            },
+            open: (args) => {
+                const target = (args[0] || "").toLowerCase();
+                if (!target) {
+                    appendLine("Usage: open <resume | github | linkedin | lifeledger | focustab>", { dim: true });
+                    return;
+                }
+                const map = {
+                    resume: RESUME_URL,
+                    "resume.pdf": RESUME_URL,
+                    github: LINKS.github,
+                    linkedin: LINKS.linkedin,
+                    lifeledger: LINKS.lifeLedgerLive,
+                    focustab: LINKS.focusTabLive,
+                };
+                if (target in map) {
+                    appendLine(`opening: ${map[target]}`, { dim: true, link: target !== 'resume' && target !== 'resume.pdf' });
+                    openUrl(map[target]);
+                } else {
+                    appendLine(`open: unknown target '${target}'`, { dim: true });
+                }
             },
             clear: () => {
                 clearTerminal();
             }
         };
 
+        const COMMAND_LIST = Object.keys(COMMANDS);
         const history = [];
         let historyIndex = -1;
 
@@ -816,26 +903,28 @@
             const cmd = raw.trim();
             if (!cmd) return;
 
-            appendLine(`$ ${cmd}`);
+            // Echo
+            appendLine(`${PROMPT} ${cmd}`);
 
-            const base = cmd.split(/\s+/)[0].toLowerCase();
+            const parts = cmd.split(/\s+/);
+            const base = (parts[0] || "").toLowerCase();
+            const args = parts.slice(1);
+
             if (base in COMMANDS) {
-                COMMANDS[base]();
+                COMMANDS[base](args);
             } else {
                 appendLine(`Command not found: ${base}`, { dim: true });
                 appendLine("Type 'help' to see available commands", { dim: true });
             }
         }
 
+        // Boot typing animation (more authentic)
         const bootLines = [
-            "> connecting...",
-            "> loaded profile",
-            "> ready",
-            "",
-            "Type 'help' and press Enter"
+            "Last login: " + new Date().toLocaleString(),
+            "jotsaroop@portfolio:~$ profile",
         ];
 
-        function typeBoot(lines, { lineDelay = 180, charDelay = 14 } = {}) {
+        function typeBoot(lines, { lineDelay = 160, charDelay = 10 } = {}) {
             if (!terminalOutputEl) return;
             clearTerminal();
             let lineIdx = 0;
@@ -846,7 +935,12 @@
 
             function tick() {
                 if (lineIdx >= lines.length) {
-                    if (terminalHintEl) terminalHintEl.style.display = "block";
+                    // After boot, print profile and show hint
+                    appendLine("", {});
+                    printProfile();
+                    appendLine("", {});
+                    appendLine("Type 'help' to see commands.", { dim: true });
+                    if (terminalHintEl) terminalHintEl.style.display = "none";
                     return;
                 }
 
@@ -862,7 +956,7 @@
                     currentLine = "";
                     lineDiv = document.createElement("div");
                     terminalOutputEl.appendChild(lineDiv);
-                    terminalOutputEl.scrollTop = terminalOutputEl.scrollHeight;
+                    terminalShellEl.scrollTop = terminalShellEl.scrollHeight;
                     setTimeout(tick, lineDelay);
                 }
             }
@@ -878,6 +972,18 @@
             terminalShellEl.addEventListener("mousedown", () => {
                 setTimeout(focusTerminal, 0);
             });
+        }
+
+        function autocomplete(current) {
+            const v = (current || "").trim().toLowerCase();
+            const parts = v.split(/\s+/);
+            if (parts.length > 1) return null; // autocomplete only base command
+            const matches = COMMAND_LIST.filter(c => c.startsWith(parts[0] || ""));
+            if (matches.length === 1) return matches[0] + " ";
+            if (matches.length > 1) {
+                appendLine(matches.join("  "), { dim: true });
+            }
+            return null;
         }
 
         if (terminalInputEl) {
@@ -907,14 +1013,21 @@
                     historyIndex = Math.min(history.length, historyIndex + 1);
                     terminalInputEl.value = history[historyIndex] || "";
                 }
+
+                if (e.key === "Tab") {
+                    e.preventDefault();
+                    const suggestion = autocomplete(terminalInputEl.value);
+                    if (suggestion) terminalInputEl.value = suggestion;
+                }
             });
         }
 
+        // Start boot typing when terminal enters view
         const terminalSection = document.getElementById("terminal");
         if (terminalSection && "IntersectionObserver" in window) {
             const obs = new IntersectionObserver((entries) => {
-                const e = entries[0];
-                if (e.isIntersecting) {
+                const entry = entries[0];
+                if (entry.isIntersecting) {
                     obs.disconnect();
                     if (terminalHintEl) terminalHintEl.style.display = "none";
                     typeBoot(bootLines);
