@@ -4,7 +4,7 @@ Personal portfolio showcasing my projects, technical background, and experience 
 
 ## Live
 
-- GitHub Pages: https://jotsaroopsinghh.github.io/
+- GitHub Pages: https://jotsaroopsinghh.github.io/portfolio/
 
 ## Projects
 
