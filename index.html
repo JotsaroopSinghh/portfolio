@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jotsaroop Singh | Portfolio</title>
-    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Jotsaroop Singh | Software Engineering Portfolio</title>
+
+    <!-- ✅ SEO / sharing -->
+    <meta name="description" content="Jotsaroop Singh — Software Engineering student building full-stack products, fintech tools, and data-driven applications. Python, JavaScript, React, FastAPI." />
+    <meta name="theme-color" content="#0b0f19" />
+    <meta property="og:title" content="Jotsaroop Singh | Software Engineering Portfolio" />
+    <meta property="og:description" content="Full-stack projects (React/FastAPI), fintech tooling, and product engineering work. Python, JavaScript, SQL." />
+    <link rel="icon" href="logo.svg" type="image/svg+xml" />
 
     <style>
         :root {
@@ -23,9 +30,7 @@
             box-sizing: border-box;
             font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
         }
-        html{
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             background:
@@ -119,7 +124,7 @@
         .hero p {
             font-size: 1.15rem;
             color: var(--text-secondary);
-            max-width: 700px;
+            max-width: 780px;
             margin: 0 auto;
         }
 
@@ -192,9 +197,7 @@
             font-size: 0.98rem;
         }
 
-        .projects {
-            margin-top: 5rem;
-        }
+        .projects { margin-top: 5rem; }
 
         .projects-grid {
             display: grid;
@@ -272,102 +275,6 @@
             border-color: rgba(99, 102, 241, 0.6);
         }
 
-        .github-activity {
-            margin: 4rem 0;
-        }
-
-        .github-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            align-items: stretch;
-        }
-
-        .github-img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin-top: 0.75rem;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .github-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: transform 0.25s ease, border-color 0.25s ease;
-        }
-
-        .github-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(99, 102, 241, 0.5);
-        }
-
-        .github-card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .github-pill {
-            font-size: 0.85rem;
-            padding: 0.35rem 0.65rem;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: rgba(99, 102, 241, 0.08);
-        }
-
-        .github-commit-title {
-            font-weight: 800;
-            font-size: 1.05rem;
-            line-height: 1.3;
-            margin: 0.25rem 0 0.75rem;
-        }
-
-        .github-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem 1rem;
-            opacity: 0.85;
-            font-size: 0.92rem;
-        }
-
-        .github-actions {
-            margin-top: 1rem;
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .github-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.7rem 1rem;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            text-decoration: none;
-            color: var(--text);
-            background: rgba(255, 255, 255, 0.02);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-            font-weight: 700;
-        }
-
-        .github-btn:hover {
-            transform: translateY(-2px);
-            border-color: rgba(99, 102, 241, 0.6);
-        }
-
-        .github-muted {
-            opacity: 0.75;
-            font-size: 0.95rem;
-        }
-
-
         .project-preview {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -391,9 +298,7 @@
             display: block;
         }
 
-        .terminal-section {
-            margin: 4.5rem 0;
-        }
+        .terminal-section { margin: 4.5rem 0; }
 
         .terminal {
             position: relative;
@@ -406,7 +311,6 @@
             box-shadow: 0 20px 70px rgba(0,0,0,0.5);
         }
 
-        /* Subtle scanlines + noise overlay */
         .terminal::before {
             content: "";
             position: absolute;
@@ -470,13 +374,8 @@
             word-break: break-word;
         }
 
-        .terminal-output {
-            white-space: pre-wrap;
-        }
-
-        .terminal-output .dim {
-            color: rgba(230,230,240,0.62);
-        }
+        .terminal-output { white-space: pre-wrap; }
+        .terminal-output .dim { color: rgba(230,230,240,0.62); }
 
         .terminal-input-line {
             display: flex;
@@ -501,20 +400,7 @@
             caret-color: rgba(236, 72, 153, 0.85);
         }
 
-        /* Fake block cursor */
-        .terminal-cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.15em;
-            background: rgba(236, 72, 153, 0.85);
-            margin-left: 2px;
-            transform: translateY(2px);
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
+        @keyframes blink { 50% { opacity: 0; } }
 
         .terminal-body a {
             color: rgba(99, 102, 241, 0.95);
@@ -522,9 +408,7 @@
             font-weight: 800;
         }
 
-        .terminal-body a:hover {
-            text-decoration: underline;
-        }
+        .terminal-body a:hover { text-decoration: underline; }
 
         .terminal-hint {
             color: rgba(230,230,240,0.65);
@@ -562,34 +446,23 @@
             border-color: rgba(236, 72, 153, 0.5);
         }
 
-        
         @keyframes breathe {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-@media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            main {
-                padding: 3rem 1.2rem;
-            }
-
-            header {
-                gap: 1rem;
-            }
-
-            .nav {
-                display: none;
-            }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            main { padding: 3rem 1.2rem; }
+            header { gap: 1rem; }
+            .nav { display: none; }
         }
     </style>
 </head>
+
 <body>
-        <header>
+    <header>
         <div class="logo">>my_portfolio</div>
 
         <nav class="nav">
@@ -605,7 +478,10 @@
     <main>
         <section class="hero">
             <h1>Jotsaroop Singh</h1>
-            <p>Second year Computer Science Honors student at University of Alberta.</p>
+            <p>
+                Computer Science (Honors) student at the University of Alberta.
+                Interested in SWE, fintech, and data-driven applications.
+            </p>
 
             <div class="hero-actions">
                 <a class="hero-btn hero-btn-primary" href="#projects">View Projects</a>
@@ -620,67 +496,78 @@
             <div class="tech-grid">
                 <div class="tech-card">
                     <h3>Languages</h3>
-                    <p>Python, JavaScript, C, C++, SQL</p>
+                    <p>Python, JavaScript, SQL, C/C++ </p>
                 </div>
                 <div class="tech-card">
-                    <h3>Frameworks</h3>
-                    <p>React, Node.js, Express, FastAPI</p>
+                    <h3>Backend</h3>
+                    <p>FastAPI, REST APIs, data modeling, integrations</p>
                 </div>
                 <div class="tech-card">
-                    <h3>Tools</h3>
-                    <p>Git, GitHub</p>
-                </div>
-                <div class="tech-card">
-                    <h3>Interests</h3>
-                    <p>Quant, fintech, building clean UI/UX</p>
+                    <h3>Frontend</h3>
+                    <p>React, HTML/CSS, Tailwind</p>
                 </div>
             </div>
         </section>
 
         <section class="projects" id="projects">
             <h2 class="section-title">Projects</h2>
+
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-preview">
-                        <img src="assets/2.jpg" alt="LifeLedger project preview" onerror="this.style.display='none'; this.parentElement.textContent='Project Preview (Coming Soon)';" />
+                        <img src="assets/2.jpg" alt="LifeLedger project preview"
+                             onerror="this.style.display='none'; this.parentElement.textContent='Project Preview (Coming Soon)';" />
                     </div>
+
                     <h3>LifeLedger</h3>
-                    <p>A full-stack financial simulation platform that models long-term cash flow, debt, and investments. Uses Monte Carlo simulation for stochastic investment returns to estimate insolvency probability and net-worth outcome distributions.</p>
+                    <p>
+                        A full-stack personal finance tool that simulates long-term scenarios (income, spending, debt, investing)
+                        and turns uncertainty into clear outcomes users can understand. Built with a Python backend and a React UI,
+                        deployed as a production web app.
+                    </p>
+
                     <div class="project-tags">
                         <span class="tag">Python</span>
                         <span class="tag">FastAPI</span>
                         <span class="tag">React</span>
                         <span class="tag">NumPy</span>
-                        <span class="tag">Monte Carlo</span>
+                        <span class="tag">APIs</span>
                     </div>
+
                     <div class="project-actions">
                         <a class="btn" href="https://github.com/JotsaroopSinghh/LifeLedger" target="_blank" rel="noopener noreferrer">GitHub</a>
                         <a class="btn" href="https://lifeledger-1.onrender.com/" target="_blank" rel="noopener noreferrer">Live</a>
                     </div>
                 </div>
 
-
                 <div class="project-card">
                     <div class="project-preview">
-                        <img src="assets/1.jpg" alt="Focus Tab project preview" onerror="this.style.display='none'; this.parentElement.textContent='Project Preview (Coming Soon)';" />
+                        <img src="assets/1.jpg" alt="Focus Tab project preview"
+                             onerror="this.style.display='none'; this.parentElement.textContent='Project Preview (Coming Soon)';" />
                     </div>
+
                     <h3>Focus Tab</h3>
-                    <p>A multi-widget Chrome new-tab extension that helps you stay focused with a Pomodoro timer, to-do list, music player, customizable backgrounds, weather, and daily quotes.</p>
+                    <p>
+                        A productivity Chrome extension focused on fast, clean UX. Includes a Pomodoro timer, to-do list,
+                        and real-time integrations (weather/quotes) with practical error handling and user customization.
+                    </p>
+
                     <div class="project-tags">
                         <span class="tag">JavaScript</span>
                         <span class="tag">HTML/CSS</span>
                         <span class="tag">Chrome Extension</span>
                         <span class="tag">APIs</span>
+                        <span class="tag">Product</span>
                     </div>
+
                     <div class="project-actions">
                         <a class="btn" href="https://github.com/JotsaroopSinghh/Focus-Tab" target="_blank" rel="noopener noreferrer">GitHub</a>
                         <a class="btn" href="https://chromewebstore.google.com/detail/focus-tab/leiofepjjglilgnegnnppaglgdnpieen" target="_blank" rel="noopener noreferrer">Live</a>
                     </div>
                 </div>
-</div>
+            </div>
         </section>
 
-        
         <section class="terminal-section" id="terminal">
             <h2 class="section-title">Terminal</h2>
 
@@ -694,18 +581,22 @@
                     <div class="terminal-title">jotsaroop@portfolio:~</div>
                     <div style="width: 40px;"></div>
                 </div>
+
                 <div class="terminal-body" id="terminalShell" role="application" aria-label="Interactive terminal">
                     <div id="terminalOutput" class="terminal-output"></div>
+
                     <div class="terminal-input-line" aria-label="Terminal input">
                         <span class="terminal-prompt" id="terminalPrompt">jotsaroop@portfolio:~$</span>
-                        <input id="terminalInput" class="terminal-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Type a command and press Enter" />
+                        <input id="terminalInput" class="terminal-input" type="text"
+                               autocomplete="off" autocapitalize="off" spellcheck="false"
+                               aria-label="Type a command and press Enter" />
                     </div>
+
                     <div class="terminal-hint" id="terminalHint">Tip: type <strong>help</strong> and press Enter</div>
                 </div>
             </div>
         </section>
-
-</main>
+    </main>
 
     <footer>
         <div class="footer-content" id="contact">
@@ -721,8 +612,6 @@
     </footer>
 
     <script>
-
-        // Interactive terminal (GitHub Pages-safe)
         const terminalOutputEl = document.getElementById("terminalOutput");
         const terminalInputEl = document.getElementById("terminalInput");
         const terminalShellEl = document.getElementById("terminalShell");
@@ -730,6 +619,7 @@
 
         const PROMPT = "jotsaroop@portfolio:~$";
         const RESUME_URL = "assets/Resume.pdf";
+
         const LINKS = {
             github: "https://github.com/JotsaroopSinghh",
             linkedin: "https://www.linkedin.com/in/jotsaroop-singh/",
@@ -788,22 +678,20 @@
         function printProfile() {
             const info = [
                 "",
-                `User: Jotsaroop Singh`,
-                `OS: GitHub Pages`,
-                `Shell: portfolio-terminal`,
-                `Location: Edmonton, AB`,
-                `Focus: SWE / Data / FinTech`,
-                `Projects: LifeLedger, Focus Tab`,
-                `Links: ${LINKS.github}`,
+                "User: Jotsaroop Singh",
+                "OS: GitHub Pages",
+                "Shell: portfolio-terminal",
+                "Location: Edmonton, AB",
+                "Focus: SWE + FinTech",
+                "Stack: Python / JS / React / FastAPI / SQL",
+                "Links: " + LINKS.github,
                 ""
             ];
 
-            const left = ASCII_NEOFETCH;
-            const right = info;
-            const rows = Math.max(left.length, right.length);
+            const rows = Math.max(ASCII_NEOFETCH.length, info.length);
             for (let i = 0; i < rows; i++) {
-                const l = left[i] || "";
-                const r = right[i] || "";
+                const l = ASCII_NEOFETCH[i] || "";
+                const r = info[i] || "";
                 appendLine(l.padEnd(18, " ") + r);
             }
         }
@@ -824,15 +712,15 @@
             },
             whoami: () => {
                 appendLine("Jotsaroop Singh — CS (Honors) @ University of Alberta");
-                appendLine("Interests: SWE, data/ML, fintech", { dim: true });
             },
             projects: () => {
-                appendLine("LifeLedger — Financial Simulation Platform");
-                appendLine("Focus Tab — Chrome Extension");
+                appendLine("LifeLedger — Personal finance + scenario simulation web app");
+                appendLine("Focus Tab — Productivity Chrome extension (real-time integrations)");
                 appendLine("Tip: run 'links' for GitHub/live links", { dim: true });
             },
             skills: () => {
-                appendLine("Python, JavaScript, FastAPI, React, NumPy");
+                appendLine("Python, JavaScript, SQL, FastAPI, React, Git");
+                appendLine("Interests: Full-Stack development, Finance, Machine Learning", { dim: true });
             },
             links: () => {
                 appendLine(`GitHub: ${LINKS.github}`, { link: true });
@@ -842,26 +730,20 @@
                 appendLine(`Focus Tab (repo): ${LINKS.focusTabRepo}`, { link: true });
                 appendLine(`LinkedIn: ${LINKS.linkedin}`, { link: true });
                 appendLine(`Email: ${LINKS.email}`, { link: true });
-                appendLine(`Resume: ${location.origin}${location.pathname.replace(/\/?$/, '/')}${RESUME_URL}`, { link: true });
+                appendLine(`Resume: ${RESUME_URL}`, { link: false });
             },
-            profile: () => {
-                printProfile();
-            },
-            ls: () => {
-                appendLine("about.txt   projects.txt   links.txt   resume.pdf", { dim: true });
-            },
+            profile: () => printProfile(),
+            ls: () => appendLine("about.txt   projects.txt   links.txt   resume.pdf", { dim: true }),
             cat: (args) => {
                 const file = (args[0] || "").toLowerCase();
-                if (!file) {
-                    appendLine("Usage: cat <file>", { dim: true });
-                    return;
-                }
+                if (!file) return appendLine("Usage: cat <file>", { dim: true });
+
                 if (file === "about.txt") {
                     appendLine("Jotsaroop Singh — CS (Honors) @ University of Alberta");
-                    appendLine("Interested in SWE, data/ML, and fintech.");
+                    appendLine("Product-focused SWE building full-stack apps and fintech-style tools.");
                 } else if (file === "projects.txt") {
-                    appendLine("- LifeLedger: Monte Carlo investment returns + long-term financial simulation");
-                    appendLine("- Focus Tab: Chrome new-tab productivity extension");
+                    appendLine("- LifeLedger: personal finance scenario modeling + interactive web app");
+                    appendLine("- Focus Tab: productivity new-tab extension with real-time API integrations");
                 } else if (file === "links.txt") {
                     COMMANDS.links();
                 } else if (file === "resume.pdf" || file === "resume") {
@@ -873,10 +755,8 @@
             },
             open: (args) => {
                 const target = (args[0] || "").toLowerCase();
-                if (!target) {
-                    appendLine("Usage: open <resume | github | linkedin | lifeledger | focustab>", { dim: true });
-                    return;
-                }
+                if (!target) return appendLine("Usage: open <resume | github | linkedin | lifeledger | focustab>", { dim: true });
+
                 const map = {
                     resume: RESUME_URL,
                     "resume.pdf": RESUME_URL,
@@ -885,16 +765,15 @@
                     lifeledger: LINKS.lifeLedgerLive,
                     focustab: LINKS.focusTabLive,
                 };
+
                 if (target in map) {
-                    appendLine(`opening: ${map[target]}`, { dim: true, link: target !== 'resume' && target !== 'resume.pdf' });
+                    appendLine(`opening: ${map[target]}`, { dim: true, link: target !== "resume" && target !== "resume.pdf" });
                     openUrl(map[target]);
                 } else {
                     appendLine(`open: unknown target '${target}'`, { dim: true });
                 }
             },
-            clear: () => {
-                clearTerminal();
-            }
+            clear: () => clearTerminal()
         };
 
         const COMMAND_LIST = Object.keys(COMMANDS);
@@ -905,22 +784,18 @@
             const cmd = raw.trim();
             if (!cmd) return;
 
-            // Echo
             appendLine(`${PROMPT} ${cmd}`);
-
             const parts = cmd.split(/\s+/);
             const base = (parts[0] || "").toLowerCase();
             const args = parts.slice(1);
 
-            if (base in COMMANDS) {
-                COMMANDS[base](args);
-            } else {
+            if (base in COMMANDS) COMMANDS[base](args);
+            else {
                 appendLine(`Command not found: ${base}`, { dim: true });
                 appendLine("Type 'help' to see available commands", { dim: true });
             }
         }
 
-        // Boot typing animation (more authentic)
         const bootLines = [
             "Last login: " + new Date().toLocaleString(),
             "jotsaroop@portfolio:~$ profile",
@@ -929,18 +804,15 @@
         function typeBoot(lines, { lineDelay = 160, charDelay = 10 } = {}) {
             if (!terminalOutputEl) return;
             clearTerminal();
-            let lineIdx = 0;
-            let charIdx = 0;
-            let currentLine = "";
+            let lineIdx = 0, charIdx = 0, currentLine = "";
             let lineDiv = document.createElement("div");
             terminalOutputEl.appendChild(lineDiv);
 
             function tick() {
                 if (lineIdx >= lines.length) {
-                    // After boot, print profile and show hint
-                    appendLine("", {});
+                    appendLine("");
                     printProfile();
-                    appendLine("", {});
+                    appendLine("");
                     appendLine("Type 'help' to see commands.", { dim: true });
                     if (terminalHintEl) terminalHintEl.style.display = "none";
                     return;
@@ -948,12 +820,11 @@
 
                 const target = lines[lineIdx];
                 if (charIdx < target.length) {
-                    currentLine += target[charIdx];
+                    currentLine += target[charIdx++];
                     lineDiv.textContent = currentLine;
-                    charIdx += 1;
                     setTimeout(tick, charDelay);
                 } else {
-                    lineIdx += 1;
+                    lineIdx++;
                     charIdx = 0;
                     currentLine = "";
                     lineDiv = document.createElement("div");
@@ -962,29 +833,22 @@
                     setTimeout(tick, lineDelay);
                 }
             }
-
             tick();
         }
 
-        function focusTerminal() {
-            if (terminalInputEl) terminalInputEl.focus();
-        }
+        function focusTerminal() { if (terminalInputEl) terminalInputEl.focus(); }
 
         if (terminalShellEl) {
-            terminalShellEl.addEventListener("mousedown", () => {
-                setTimeout(focusTerminal, 0);
-            });
+            terminalShellEl.addEventListener("mousedown", () => setTimeout(focusTerminal, 0));
         }
 
         function autocomplete(current) {
             const v = (current || "").trim().toLowerCase();
             const parts = v.split(/\s+/);
-            if (parts.length > 1) return null; // autocomplete only base command
+            if (parts.length > 1) return null;
             const matches = COMMAND_LIST.filter(c => c.startsWith(parts[0] || ""));
             if (matches.length === 1) return matches[0] + " ";
-            if (matches.length > 1) {
-                appendLine(matches.join("  "), { dim: true });
-            }
+            if (matches.length > 1) appendLine(matches.join("  "), { dim: true });
             return null;
         }
 
@@ -1024,12 +888,10 @@
             });
         }
 
-        // Start boot typing when terminal enters view
         const terminalSection = document.getElementById("terminal");
         if (terminalSection && "IntersectionObserver" in window) {
             const obs = new IntersectionObserver((entries) => {
-                const entry = entries[0];
-                if (entry.isIntersecting) {
+                if (entries[0].isIntersecting) {
                     obs.disconnect();
                     if (terminalHintEl) terminalHintEl.style.display = "none";
                     typeBoot(bootLines);
@@ -1041,7 +903,6 @@
             if (terminalHintEl) terminalHintEl.style.display = "none";
             typeBoot(bootLines);
         }
-
     </script>
 </body>
 </html>
